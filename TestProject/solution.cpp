@@ -1,62 +1,104 @@
-//DFS BFS ±¸Çö
 #include <iostream>
+#include <stdio.h>
 #include <queue>
-#define MAX 100
+#include <utility>
+#include <algorithm>
 using namespace std;
 
-queue <int> Queue;
-vector <int> myGraph[MAX];
-int n, v;
-bool visit[MAX];
-bool D[MAX];
+int r, c, ret = 2147483647;
+char maze[1010][1010], temp[1001][1001];
+int visit[1001][1001];
+int dx[] = { 0, -1, 0, 1 };
+int dy[] = { -1, 0, 1, 0 };
 
-void BFS() {
-	
-	Queue.push(1);
-	visit[1] = true;
+void spreadFire() {
+	int j, k, i, ax, ay;
 
-	while (!Queue.empty())
-	{
-		int current = Queue.front();
-		Queue.pop();
-		cout << current << ' ';
-		for (int i = 0; i < myGraph[current].size(); i++) {
-			int next = myGraph[current][i];
-			if (!visit[next]) {
-				visit[next] = true;
-				Queue.push(next);
+	for (i = 0; i < r; i++) {
+		for (j = 0; j < c; j++) {
+			if (temp[i][j] == 'F') {
+				for (k = 0; k < 4; k++) {
+					ax = i + dx[k];
+					ay = j + dy[k];
+
+					if (ax >= 0 && ax < r && ay >= 0 && ay < c && (maze[ax][ay] == '.' || maze[ax][ay] == 'J')) {
+						maze[ax][ay] = 'F';
+					}
+				}
 			}
 		}
 	}
 }
 
-void DFS(int cur) {
+void returnFire() {
+	int i, j;
 
-	D[cur] = true;
-	cout << cur << ' ';
-	for (int i = 0; i < myGraph[cur].size(); i++) {
-		int next = myGraph[cur][i];
-		if (!D[next]) {
-			D[next] = true;
-			DFS(next);
+	for (i = 0; i < r; i++) {
+		for (j = 0; j < c; j++)
+			maze[i][j] = temp[i][j];
+	}
+}
+
+
+void dfs(int x, int y, int depth) {
+	int ax, ay, i, j;
+	printf("dfs : %d\n", depth);
+	if (maze[x][y] == 'F')
+		return;
+
+	if (x == 0 || x == r - 1 || y == 0 || y == c - 1) {
+		ret = min(ret, depth);
+		for (i = 0; i < r; i++) {
+			for (j = 0; j < c; j++) {
+				printf("%c", maze[i][j]);
+			}
+			printf("\n");
+		}
+		return;
+	}
+
+	for (i = 0; i < r; i++) {
+		for (j = 0; j < c; j++)
+			temp[i][j] = maze[i][j];
+	}
+
+	for (i = 0; i < 4; i++) {
+		ax = x + dx[i];
+		ay = y + dy[i];
+
+		if (ax >= 0 && ax < r && ay >= 0 && ay < c && (maze[ax][ay] == '.' || maze[ax][ay] == 'J') && visit[ax][ay] == 0) {
+			spreadFire();
+			visit[ax][ay] = 1;
+
+			dfs(ax, ay, depth + 1);
+
+			visit[ax][ay] = 0;
+			returnFire();
+		}
+	}
+}
+
+
+int main(int argc, const char * argv[]) {
+	int i, j;
+
+	scanf("%d %d", &r, &c);
+	for (i = 0; i < r; i++) {
+		scanf("%s", maze[i]);
+
+	}
+
+	for (i = 0; i < r; i++) {
+		for (j = 0; j < c; j++) {
+			if (maze[i][j] == 'J')
+				dfs(i, j, 1);
 		}
 	}
 
-}
+	if (ret == 2147483647)
+		printf("IMPOSSIBLE");
+	else
+		printf("%d\n", ret);
 
-int main() {
-
-	cin >> n >> v;
-
-	for (int i = 0; i < v; i++) {
-		int n1, n2;
-		cin >> n1 >> n2;
-		myGraph[n1].push_back(n2);
-		myGraph[n2].push_back(n1);
-	}
-
-	BFS();
-	cout << '\n';
-	DFS(1);
 	return 0;
 }
