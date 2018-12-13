@@ -1,97 +1,99 @@
 #include <iostream>
 #include <queue>
 #include <utility>
-#define MAX 30
 using namespace std;
 
+bool arr[50][50];
+bool visit[50][50][2]; // 0 왼 1 오른쪽
 int n, m, h;
+int ans = 99999;
 
-queue<pair<int, int>> q;
-int arr[MAX + 1][MAX + 1];
-int visit[MAX + 1][MAX + 1];
-int D[MAX];
-bool sw;
+bool check(int row, int col) {
 
-bool check_line() {
-	
-	for (int i = 1; i <= n; i++) {
-		int row = 1;
-		int col = i;
-		while (row < h + 1) {
-			if (visit[row][col] == 1) {
-				col += 1;
-			}
-			else if (visit[row][col] == -1) {
-				col -= 1;
-			}
-			row++;
-		}
-		//cout << i << ' ';
-		if (col != i) return false;
-	}
-	return true;
-}
-
-bool check(int row, int col, int cur) {
-
-	if (row < 1 || col < 1 || row > h || col >= n) return false;
-	if (D[cur]) return false;
-	if (visit[row][col] || visit[row][col + 1]) return false;
+	if (row <= 0 || col <= 0 || row > h || col >= n) return false; // 끝에도 안댐
+	if (visit[row][col][1] || visit[row][col][0]) return false; // 오른쪽이 연결 or 왼쪽으로 연결
 
 	return true;
 }
 
-void DFS(int row, int col,int cur) {
+bool find(int row, int col) {
 
-	if (sw) return;
-	if (cur == 0) {
-		if (check_line()) {
-			sw = true;
-		}
-		return;
+	int start = col;
+
+	while (row < h + 1) {
+		if (visit[row][col][1]) col++;
+		else if (visit[row][col][0]) col--;
+		row++;
 	}
 
-	for (int i = 1; i <= h; i++) {
-		for (int j = 1; j < n; j++) {
-		
-			if (check(i, j, cur)) {
-				D[cur] = true;
-				visit[i][j] = 1;
-				visit[i][j + 1] = -1;
-				DFS(i , j, cur - 1);
-				D[cur] = false;
-				visit[i][j] = 0;
-				visit[i][j + 1] = 0;
+	if (start != col) return false;
+	else return true;
+
+}
+
+bool simul() {
+
+	for (int i = 1; i < n; ++i) {		// 끝은 자동
+		if (!find(1, i)) {
+			return false;
+		}
+	}
+
+	return true;
+}
+
+void DFS(int cur_row, int cur_col,int cur) {
+
+	if (cur == 4) return;
+	if (ans <= cur) return;
+	if (simul()) {
+		for (int i = 1; i <= h; ++i) {
+			for (int j = 1; j <= n; ++j) {
+				if (visit[i][j][0]) cout << 'l';
+				else if (visit[i][j][1]) cout << 'r';
+				else cout << '.';
 			}
+			cout << '\n';
 		}
-
+		if (ans > cur) ans = cur;
 	}
-	
+
+	for (int row = cur_row; row <= h; ++row) {
+		for (int col = 1; col < n; ++col) {
+			if (row == cur_row && col <= cur_col) continue;
+			if (check(row, col)) {
+				visit[row][col][1] = true;
+				visit[row][col + 1][0] = true;
+				DFS(row, col, cur + 1);
+				visit[row][col][1] = false;
+				visit[row][col + 1][0] = false;
+			}
+
+		}
+	}
+
 
 }
 
 int main() {
 
+	cin.tie(0); ios::sync_with_stdio(0);
 	cin >> n >> m >> h;
-	
-	for (int i = 0; i < m; i++) {
+
+	for (int i = 0; i < m; ++i) {
 		int a, b;
 		cin >> a >> b;
-		arr[a][b] = 1;
-		arr[a][b + 1] = -1;
-		visit[a][b] = 1;
-		visit[a][b + 1] = -1;
+		visit[a][b][1] = true;
+		visit[a][b + 1][0] = true;
 	}
 
-	
-	for (int i = 0; i <= 3; i++) {
-		DFS(1, 1, i);
-		if (sw) {
-			cout << i;
-			return 0;
-		}
+	DFS(1, 0, 0);
+
+	if (ans == 99999) {
+		cout << "-1" << '\n';
+		return 0;
 	}
-	cout << -1;
+	cout << ans << '\n';
 
 	return 0;
 }
