@@ -11,7 +11,7 @@ int ans = 99999;
 bool check(int row, int col) {
 
 	if (row <= 0 || col <= 0 || row > h || col >= n) return false; // 끝에도 안댐
-	if (visit[row][col][1] || visit[row][col][0]) return false; // 오른쪽이 연결 or 왼쪽으로 연결
+	if (visit[row][col][1] || visit[row][col][0] || visit[row][col + 1][0] || visit[row][col + 1][1]) return false; // 오른쪽이 연결 or 왼쪽으로 연결
 
 	return true;
 }
@@ -47,14 +47,6 @@ void DFS(int cur_row, int cur_col,int cur) {
 	if (cur == 4) return;
 	if (ans <= cur) return;
 	if (simul()) {
-		for (int i = 1; i <= h; ++i) {
-			for (int j = 1; j <= n; ++j) {
-				if (visit[i][j][0]) cout << 'l';
-				else if (visit[i][j][1]) cout << 'r';
-				else cout << '.';
-			}
-			cout << '\n';
-		}
 		if (ans > cur) ans = cur;
 	}
 
