@@ -1,3 +1,0 @@
-﻿  solution.cpp
-c:\users\kkygo\source\repos\baekjoon\4673\solution.cpp(7): warning C4101: 'self' :참조되지 않은 지역 변수입니다.
-  4673.vcxproj -> C:\Users\kkygo\source\repos\BAEKJOON\x64\Debug\4673.exe

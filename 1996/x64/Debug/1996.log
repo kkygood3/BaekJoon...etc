@@ -1,3 +1,0 @@
-﻿  solution.cpp
-c:\users\kkygo\source\repos\baekjoon\1996\solution.cpp(15): warning C4101: 'want' :참조되지 않은 지역 변수입니다.
-  1996.vcxproj -> C:\Users\kkygo\source\repos\BAEKJOON\x64\Debug\1996.exe

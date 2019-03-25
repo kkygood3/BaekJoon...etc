@@ -1,3 +1,0 @@
-﻿  solution.cpp
-c:\users\kkygo\source\repos\baekjoon\sw_5648\solution.cpp(52): warning C4101: 'a' :참조되지 않은 지역 변수입니다.
-  SW_5648.vcxproj -> C:\Users\kkygo\source\repos\BAEKJOON\x64\Debug\SW_5648.exe

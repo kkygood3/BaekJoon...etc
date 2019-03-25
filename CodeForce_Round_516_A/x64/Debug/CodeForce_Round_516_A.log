@@ -1,3 +1,0 @@
-﻿  solution.cpp
-c:\users\kkygo\source\repos\baekjoon\codeforce_round_516_a\solution.cpp(10): warning C4101: 'Max' :참조되지 않은 지역 변수입니다.
-  CodeForce_Round_516_A.vcxproj -> C:\Users\kkygo\source\repos\BAEKJOON\x64\Debug\CodeForce_Round_516_A.exe

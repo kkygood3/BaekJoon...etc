@@ -1,4 +1,0 @@
-﻿  solution.cpp
-c:\users\kkygo\source\repos\baekjoon\line_intern_2\solution.cpp(13): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\kkygo\source\repos\baekjoon\line_intern_2\solution.cpp(67): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Line_Intern_2.vcxproj -> C:\Users\kkygo\source\repos\BAEKJOON\x64\Debug\Line_Intern_2.exe
