@@ -9,6 +9,6 @@
 *.pch
 *.idb
 *.pdb
-*.j.h
+*.h
 *.sln
 .vs/
