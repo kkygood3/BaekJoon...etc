@@ -5,4 +5,10 @@
 *.log
 *.tlog
 *.ipch
+*.obj
+*.pch
+*.idb
+*.pdb
+*.j.h
+*.sln
 .vs/
