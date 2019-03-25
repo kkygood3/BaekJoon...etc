@@ -1,9 +1,14 @@
-﻿  other_solution.cpp
+﻿  forth_solution.cpp
+  other_solution.cpp
+  solution.cpp
+  third_solution.cpp
+  코드를 생성하고 있습니다...
 other_solution.obj : error LNK2005: "void __cdecl DFS(int,int,int,int)" (?DFS@@YAXHHHH@Z)이(가) forth_solution.obj에 이미 정의되어 있습니다.
 other_solution.obj : error LNK2005: "bool __cdecl compare(struct Item,struct Item)" (?compare@@YA_NUItem@@0@Z)이(가) forth_solution.obj에 이미 정의되어 있습니다.
 other_solution.obj : error LNK2005: main이(가) forth_solution.obj에 이미 정의되어 있습니다.
 other_solution.obj : error LNK2005: "int r" (?r@@3HA)이(가) forth_solution.obj에 이미 정의되어 있습니다.
 other_solution.obj : error LNK2005: "int n" (?n@@3HA)이(가) forth_solution.obj에 이미 정의되어 있습니다.
+other_solution.obj : error LNK2005: "int cur_time" (?cur_time@@3HA)이(가) forth_solution.obj에 이미 정의되어 있습니다.
 other_solution.obj : error LNK2005: "int end_time" (?end_time@@3HA)이(가) forth_solution.obj에 이미 정의되어 있습니다.
 other_solution.obj : error LNK2005: "int (* arr)[11]" (?arr@@3PAY0L@HA)이(가) forth_solution.obj에 이미 정의되어 있습니다.
 other_solution.obj : error LNK2005: "class std::vector<int,class std::allocator<int> > ans" (?ans@@3V?$vector@HV?$allocator@H@std@@@std@@A)이(가) forth_solution.obj에 이미 정의되어 있습니다.

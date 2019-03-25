@@ -25,7 +25,7 @@ int dpf(int tx, int ty) {
 	}
 
 	return dp[tx][ty] += sum[ty] - sum[tx - 1];
-}
+}	
 
 int main() {
 	cin >> t;

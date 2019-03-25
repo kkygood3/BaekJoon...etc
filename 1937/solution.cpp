@@ -7,7 +7,7 @@ int dp[510][510];
 int n;
 int d_row[4] = { -1,1,0,0 };
 int d_col[4] = { 0,0,-1,1 };
-int ans = 0;
+int ans = 1;
 
 int DFS(int row, int col) {
 
